@@ -64,9 +64,9 @@ export default function Hero() {
         </div>
 
         {/* Name */}
-        <h1 className="mb-5 font-display text-5xl font-extrabold leading-none tracking-tight text-white sm:text-6xl lg:text-7xl">
-          {HERO.name.split(" ").slice(0, -2).join(" ")}{" "}
-          <span className="gradient-text">{HERO.name.split(" ").slice(-2).join(" ")}</span>
+        <h1 className="mb-5 font-display text-5xl font-extrabold leading-none tracking-tight sm:text-6xl lg:text-7xl">
+          <span className="block text-indigo-400">{HERO.name.split(" ").slice(0, 2).join(" ")}</span>
+          <span className="block text-white">{HERO.name.split(" ").slice(2).join(" ")}</span>
         </h1>
 
         {/* Typewriter */}

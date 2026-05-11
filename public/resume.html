@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Resume — Chappidi Uday Kiran</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #0a0a12;
+      --card-bg: rgba(255,255,255,0.03);
+      --card-border: rgba(255,255,255,0.07);
+      --text: #e8eaf6;
+      --text-muted: #8892b0;
+      --accent: #818cf8;
+      --accent-2: #22d3ee;
+      --accent-3: #a78bfa;
+      --gradient: linear-gradient(135deg, #818cf8, #a78bfa, #22d3ee);
+    }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Print Styles */
+    @media print {
+      :root {
+        --bg: #fff;
+        --card-bg: #f8f9fa;
+        --card-border: #e0e0e0;
+        --text: #1a1a2e;
+        --text-muted: #555;
+        --accent: #4f46e5;
+        --accent-2: #0891b2;
+        --accent-3: #7c3aed;
+      }
+      body { background: #fff; }
+      .no-print { display: none !important; }
+      .resume-container { max-width: 100%; padding: 0; }
+      .resume-card { border: none; background: transparent; box-shadow: none; }
+    }
+
+    /* Top bar */
+    .top-bar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 32px;
+      background: rgba(10,10,18,0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .top-bar .logo {
+      font-size: 1.1rem;
+      font-weight: 700;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-decoration: none;
+    }
+
+    .top-bar .actions {
+      display: flex;
+      gap: 12px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 20px;
+      border-radius: 10px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      border: none;
+      text-decoration: none;
+    }
+
+    .btn-back {
+      background: rgba(255,255,255,0.06);
+      color: var(--text-muted);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .btn-back:hover {
+      background: rgba(255,255,255,0.1);
+      color: var(--text);
+    }
+
+    .btn-print {
+      background: linear-gradient(135deg, #818cf8, #22d3ee);
+      color: #fff;
+    }
+    .btn-print:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 24px rgba(129,140,248,0.35);
+    }
+
+    /* Container */
+    .resume-container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 100px 24px 60px;
+    }
+
+    .resume-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 48px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .resume-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--gradient);
+    }
+
+    /* Header */
+    .resume-header {
+      text-align: center;
+      margin-bottom: 40px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    .resume-header h1 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      margin-bottom: 6px;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .resume-header .subtitle {
+      font-size: 1.05rem;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    .contact-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px 20px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .contact-row a {
+      color: var(--accent-2);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .contact-row a:hover { color: var(--accent); }
+
+    .contact-row .separator {
+      color: rgba(255,255,255,0.15);
+    }
+
+    /* Sections */
+    .section {
+      margin-bottom: 32px;
+    }
+
+    .section-title {
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, var(--card-border), transparent);
+    }
+
+    /* Education */
+    .edu-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 14px;
+      padding: 14px 16px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.04);
+      transition: border-color 0.2s;
+    }
+    .edu-item:hover {
+      border-color: rgba(129,140,248,0.2);
+    }
+
+    .edu-item h3 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 2px;
+    }
+
+    .edu-item .institution {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .edu-item .meta {
+      text-align: right;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    .edu-item .grade {
+      color: var(--accent-2);
+      font-weight: 600;
+    }
+
+    /* Experience / Project items */
+    .exp-item {
+      margin-bottom: 20px;
+      padding: 18px 20px;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.04);
+      transition: border-color 0.2s;
+    }
+    .exp-item:hover {
+      border-color: rgba(129,140,248,0.2);
+    }
+
+    .exp-item .exp-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 10px;
+    }
+
+    .exp-item h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .exp-item h3 span {
+      color: var(--text-muted);
+      font-weight: 400;
+      font-size: 0.9rem;
+    }
+
+    .exp-item .date {
+      font-size: 0.8rem;
+      color: var(--accent);
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    .exp-item ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .exp-item ul li {
+      position: relative;
+      padding-left: 18px;
+      margin-bottom: 6px;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+
+    .exp-item ul li::before {
+      content: '▹';
+      position: absolute;
+      left: 0;
+      color: var(--accent-2);
+      font-size: 0.75rem;
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 10px;
+    }
+
+    .tag {
+      padding: 3px 10px;
+      border-radius: 6px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      background: rgba(129,140,248,0.1);
+      color: var(--accent);
+      border: 1px solid rgba(129,140,248,0.2);
+    }
+
+    /* Skills grid */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 16px;
+    }
+
+    .skill-group {
+      padding: 16px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.04);
+      transition: border-color 0.2s;
+    }
+    .skill-group:hover {
+      border-color: rgba(129,140,248,0.2);
+    }
+
+    .skill-group h4 {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--accent-2);
+      margin-bottom: 8px;
+      letter-spacing: 0.05em;
+    }
+
+    .skill-group p {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    /* Achievements */
+    .achievements-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .achievement {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 12px 14px;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.04);
+      transition: border-color 0.2s;
+    }
+    .achievement:hover {
+      border-color: rgba(129,140,248,0.2);
+    }
+
+    .achievement .icon {
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+
+    .achievement .ach-text {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .achievement .ach-text strong {
+      display: block;
+      color: var(--text);
+      font-size: 0.88rem;
+      margin-bottom: 2px;
+    }
+
+    /* Links row */
+    .link-item {
+      color: var(--accent-2);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .link-item:hover { color: var(--accent); }
+
+    /* Responsive */
+    @media (max-width: 640px) {
+      .resume-card { padding: 28px 20px; }
+      .resume-header h1 { font-size: 1.6rem; }
+      .edu-item { flex-direction: column; gap: 6px; }
+      .edu-item .meta { text-align: left; }
+      .exp-item .exp-header { flex-direction: column; gap: 4px; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .achievements-list { grid-template-columns: 1fr; }
+      .top-bar { padding: 12px 16px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Top Bar -->
+  <div class="top-bar no-print">
+    <a href="/" class="logo">UK.</a>
+    <div class="actions">
+      <a href="/" class="btn btn-back">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+        Back to Portfolio
+      </a>
+      <button class="btn btn-print" onclick="window.print()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+        Download PDF
+      </button>
+    </div>
+  </div>
+
+  <!-- Resume Content -->
+  <div class="resume-container">
+    <div class="resume-card">
+
+      <!-- Header -->
+      <div class="resume-header">
+        <h1>Chappidi Uday Kiran</h1>
+        <div class="subtitle">Full-Stack MERN Developer</div>
+        <div class="contact-row">
+          <span>📧 <a href="mailto:udaykiran24689@gmail.com">udaykiran24689@gmail.com</a></span>
+          <span class="separator">|</span>
+          <span>📍 Hyderabad, India</span>
+          <span class="separator">|</span>
+          <span>🔗 <a href="https://github.com/chappidiudaykiran" target="_blank">GitHub</a></span>
+          <span class="separator">|</span>
+          <span>🔗 <a href="https://www.linkedin.com/in/chappidiudaykiran/" target="_blank">LinkedIn</a></span>
+          <span class="separator">|</span>
+          <span>💻 <a href="https://leetcode.com/u/s210540/" target="_blank">LeetCode</a></span>
+        </div>
+      </div>
+
+      <!-- Education -->
+      <div class="section">
+        <div class="section-title">Education</div>
+        <div class="edu-item">
+          <div>
+            <h3>B.Tech in Computer Science & Engineering</h3>
+            <div class="institution">RGUKT IIIT Srikakulam</div>
+          </div>
+          <div class="meta">
+            <div>2023 — 2027</div>
+            <div class="grade">CGPA: 8.84 / 10</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Technical Skills -->
+      <div class="section">
+        <div class="section-title">Technical Skills</div>
+        <div class="skills-grid">
+          <div class="skill-group">
+            <h4>🎨 Frontend</h4>
+            <p>React.js, JavaScript (ES6+), Redux Toolkit, Context API, Tailwind CSS, HTML5/CSS3</p>
+          </div>
+          <div class="skill-group">
+            <h4>⚙️ Backend & Database</h4>
+            <p>Node.js, Express.js, MongoDB, Mongoose, REST APIs, JWT Authentication</p>
+          </div>
+          <div class="skill-group">
+            <h4>🚀 DevOps & Tools</h4>
+            <p>Git/GitHub, Vercel, Docker, Postman, Firebase, AWS (Basics)</p>
+          </div>
+          <div class="skill-group">
+            <h4>💻 Languages</h4>
+            <p>JavaScript, Python, Java, C/C++</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Projects -->
+      <div class="section">
+        <div class="section-title">Projects</div>
+
+        <div class="exp-item">
+          <div class="exp-header">
+            <h3>Ecurve <span>— Adaptive Educational Learning Platform</span></h3>
+            <div class="date">2025</div>
+          </div>
+          <ul>
+            <li>Full-stack MERN platform to analyze student stress and deliver personalized subject recommendations</li>
+            <li>Features course enrollment, YouTube-integrated video player, module-wise quizzes, automated grading</li>
+            <li>Real-time educator-student support chat with integrated Flask-based ML prediction API</li>
+          </ul>
+          <div class="tag-row">
+            <span class="tag">React</span>
+            <span class="tag">Node.js</span>
+            <span class="tag">Express</span>
+            <span class="tag">MongoDB</span>
+            <span class="tag">Flask ML</span>
+            <span class="tag">JWT</span>
+            <span class="tag">Google OAuth</span>
+          </div>
+        </div>
+
+        <div class="exp-item">
+          <div class="exp-header">
+            <h3>DevTinder <span>— Developer Connection Platform</span></h3>
+            <div class="date">2025</div>
+          </div>
+          <ul>
+            <li>Full-stack platform to connect developers with real-time connection requests and user profiles</li>
+            <li>Secure JWT-based authentication with custom Express middleware and RESTful APIs</li>
+            <li>Redux Toolkit for global state management with personalized developer feeds</li>
+          </ul>
+          <div class="tag-row">
+            <span class="tag">React</span>
+            <span class="tag">Redux Toolkit</span>
+            <span class="tag">Node.js</span>
+            <span class="tag">Express</span>
+            <span class="tag">MongoDB</span>
+            <span class="tag">JWT</span>
+          </div>
+        </div>
+
+        <div class="exp-item">
+          <div class="exp-header">
+            <h3>MovieGPT <span>— AI-Powered Movie Discovery</span></h3>
+            <div class="date">2024</div>
+          </div>
+          <ul>
+            <li>AI movie discovery using Groq LLM for personalized recommendations + TMDB APIs</li>
+            <li>Firebase auth, Redux state, multi-language support, and trailer playback</li>
+          </ul>
+          <div class="tag-row">
+            <span class="tag">React</span>
+            <span class="tag">Redux</span>
+            <span class="tag">Firebase</span>
+            <span class="tag">Groq API</span>
+            <span class="tag">TMDB</span>
+          </div>
+        </div>
+
+        <div class="exp-item">
+          <div class="exp-header">
+            <h3>OnboardIQ <span>— AI-Powered HR Policy Assistant</span></h3>
+            <div class="date">2024</div>
+          </div>
+          <ul>
+            <li>Helps new employees understand HR policies through natural language Q&A</li>
+            <li>Built with Gemini Flash, Streamlit, and Prompt Guardrails</li>
+          </ul>
+          <div class="tag-row">
+            <span class="tag">Gemini Flash</span>
+            <span class="tag">Streamlit</span>
+            <span class="tag">Prompt Guardrails</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Achievements & Certifications -->
+      <div class="section">
+        <div class="section-title">Achievements & Certifications</div>
+        <div class="achievements-list">
+          <div class="achievement">
+            <span class="icon">🏆</span>
+            <div class="ach-text">
+              <strong>Aignite 3.0 GenAI Hackathon — Winner</strong>
+              Built innovative AI-powered solution
+            </div>
+          </div>
+          <div class="achievement">
+            <span class="icon">⚡</span>
+            <div class="ach-text">
+              <strong>150+ LeetCode Problems Solved</strong>
+              Strong problem solving in DSA and algorithms
+            </div>
+          </div>
+          <div class="achievement">
+            <span class="icon">📜</span>
+            <div class="ach-text">
+              <strong>NPTEL — Data Science</strong>
+              Certified in Data Science using Python
+            </div>
+          </div>
+          <div class="achievement">
+            <span class="icon">🤖</span>
+            <div class="ach-text">
+              <strong>NPTEL — AI Methods</strong>
+              Certified in AI search methods for problem solving
+            </div>
+          </div>
+          <div class="achievement">
+            <span class="icon">🌐</span>
+            <div class="ach-text">
+              <strong>Web Dev Foundation</strong>
+              Completed foundational web development course
+            </div>
+          </div>
+          <div class="achievement">
+            <span class="icon">🎓</span>
+            <div class="ach-text">
+              <strong>CGPA: 8.84 / 10</strong>
+              B.Tech CSE at RGUKT IIIT Srikakulam
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>

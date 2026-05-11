@@ -1,5 +1,5 @@
 export const HERO = {
-  name: "Chappidi Uday Kiran",
+  name: "Uday Kiran Chappidi",
   roles: [
     "Full-Stack MERN Developer",
     "React.js Specialist",

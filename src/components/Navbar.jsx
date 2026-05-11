@@ -1,5 +1,13 @@
 import { useState, useEffect } from "react";
 
+const DownloadIcon = () => (
+  <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+    <path strokeLinecap="round" strokeLinejoin="round" d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+    <polyline points="7 10 12 15 17 10" />
+    <line x1="12" x2="12" y1="15" y2="3" />
+  </svg>
+);
+
 export default function Navbar({ navItems, activeSection }) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -28,17 +36,15 @@ export default function Navbar({ navItems, activeSection }) {
         scrolled ? "border-b border-white/[0.06] bg-[#050508]/85 backdrop-blur-2xl py-3" : "bg-transparent py-5"
       }`}>
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-          {/* Logo */}
-          <button onClick={() => navigate("Home")} className="group flex items-center gap-2.5">
-            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-indigo-500/15 text-sm font-bold text-indigo-400 ring-1 ring-indigo-500/25 transition-all duration-300 group-hover:bg-indigo-500/20 group-hover:ring-indigo-500/40">
-              U
-            </div>
-            <span className="hidden font-display text-sm font-bold text-white sm:block">
-              Uday <span className="text-indigo-400">Kiran</span>
+          {/* Logo — styled like "NP." in the reference */}
+          <button onClick={() => navigate("Home")} className="group flex items-center gap-1">
+            <span className="font-display text-xl font-extrabold tracking-tight">
+              <span className="bg-gradient-to-r from-indigo-400 via-violet-400 to-cyan-400 bg-clip-text text-transparent">UK</span>
+              <span className="text-cyan-400">.</span>
             </span>
           </button>
 
-          {/* Desktop */}
+          {/* Desktop Nav Links — centered */}
           <ul className="hidden list-none items-center gap-1 md:flex">
             {navItems.map((n, i) => (
               <li key={n}>
@@ -58,6 +64,19 @@ export default function Navbar({ navItems, activeSection }) {
               </li>
             ))}
           </ul>
+
+          {/* Right side — Resume button */}
+          <div className="hidden items-center gap-3 md:flex">
+            <a
+              href="/Chappidi_Uday_Kiran_Resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-indigo-500 to-cyan-500 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-indigo-500/25 transition-all duration-300 hover:from-indigo-600 hover:to-cyan-600 hover:shadow-indigo-500/40 active:scale-95"
+            >
+              <DownloadIcon />
+              Resume
+            </a>
+          </div>
 
           {/* Hamburger */}
           <button
@@ -88,6 +107,16 @@ export default function Navbar({ navItems, activeSection }) {
               {n}
             </button>
           ))}
+          {/* Resume button in mobile menu */}
+          <a
+            href="/Chappidi_Uday_Kiran_Resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-4 inline-flex w-48 items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-indigo-500 to-cyan-500 px-6 py-3.5 text-center text-lg font-semibold text-white shadow-lg shadow-indigo-500/25 transition-all duration-300"
+          >
+            <DownloadIcon />
+            Resume
+          </a>
         </div>
       </div>
     </>
