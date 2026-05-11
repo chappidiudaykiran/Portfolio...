@@ -1,12 +1,33 @@
 import { useState } from "react";
 import useScrollAnimation from "../hooks/useScrollAnimation";
 
+const EMAIL = "udaykiran24689@gmail.com";
+
 export default function Contact() {
   const sectionRef = useScrollAnimation();
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [sent, setSent] = useState(false);
   const [sending, setSending] = useState(false);
   const [error, setError] = useState("");
+  const [emailCopied, setEmailCopied] = useState(false);
+
+  const copyEmail = async (e) => {
+    e.preventDefault();
+    try {
+      await navigator.clipboard.writeText(EMAIL);
+    } catch {
+      const ta = document.createElement("textarea");
+      ta.value = EMAIL;
+      ta.style.position = "fixed";
+      ta.style.opacity = "0";
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand("copy");
+      document.body.removeChild(ta);
+    }
+    setEmailCopied(true);
+    setTimeout(() => setEmailCopied(false), 2000);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -18,7 +39,7 @@ export default function Contact() {
     try {
       setSending(true);
       setError("");
-      const response = await fetch("https://formsubmit.co/ajax/udaykiran24689@gmail.com", {
+      const response = await fetch(`https://formsubmit.co/ajax/${EMAIL}`, {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify({
@@ -35,7 +56,7 @@ export default function Contact() {
     } catch {
       const subject = encodeURIComponent(`Portfolio Contact from ${name}`);
       const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
-      window.location.href = `mailto:udaykiran24689@gmail.com?subject=${subject}&body=${body}`;
+      window.location.href = `mailto:${EMAIL}?subject=${subject}&body=${body}`;
       setError("Direct send failed — your mail app was opened with the message draft.");
     } finally {
       setSending(false);
@@ -44,9 +65,17 @@ export default function Contact() {
 
   const contactLinks = [
     {
-      label: "udaykiran24689@gmail.com",
-      href: "mailto:udaykiran24689@gmail.com",
-      icon: <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" /></svg>,
+      label: emailCopied ? "Copied!" : EMAIL,
+      onClick: copyEmail,
+      icon: emailCopied ? (
+        <svg className="h-4 w-4 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+        </svg>
+      ) : (
+        <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
+        </svg>
+      ),
     },
     {
       label: "GitHub",
@@ -61,25 +90,25 @@ export default function Contact() {
     },
   ];
 
-  const inputClass = "rounded-xl border border-accent/[0.08] bg-accent/[0.02] px-4 py-3.5 text-[14px] text-white outline-none placeholder:text-apptext/20 transition-all duration-300 focus:border-accent/30 focus:bg-accent/[0.03] focus:shadow-[0_0_25px_rgba(0,240,255,0.04)]";
+  const inputClass = "w-full rounded-xl border border-accent/[0.08] bg-accent/[0.02] px-3.5 py-3 text-[13px] text-white outline-none placeholder:text-apptext/20 transition-all duration-300 focus:border-accent/30 focus:bg-accent/[0.03] focus:shadow-[0_0_25px_rgba(0,240,255,0.04)] sm:px-4 sm:py-3.5 sm:text-[14px]";
 
   return (
-    <section id="contact" ref={sectionRef} className="relative z-10 min-h-screen px-5 py-24 sm:px-6 sm:py-28 md:px-14 md:py-32">
+    <section id="contact" ref={sectionRef} className="relative z-10 min-h-screen px-4 py-20 sm:px-6 sm:py-28 md:px-14 md:py-32">
       <div className="mx-auto w-full max-w-3xl">
         {/* Header */}
-        <div className="scroll-animate mb-16 text-center" data-animate>
+        <div className="scroll-animate mb-12 sm:mb-16 text-center" data-animate>
           <span className="section-label">// Let&apos;s Connect</span>
           <h2 className="section-title">Get in <span className="gradient-text">Touch</span></h2>
           <div className="section-divider" />
         </div>
 
         {/* Card */}
-        <div className="scroll-animate glass-card p-6 sm:p-8 md:p-12" data-animate style={{ transitionDelay: "0.1s" }}>
+        <div className="scroll-animate glass-card p-5 sm:p-8 md:p-12" data-animate style={{ transitionDelay: "0.1s" }}>
           {sent ? (
-            <div className="py-8 text-center">
-              <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-2xl bg-emerald-500/10 text-4xl shadow-[0_0_30px_rgba(16,185,129,0.1)]">✅</div>
-              <h3 className="font-display text-2xl font-bold gradient-text">Message Sent!</h3>
-              <p className="mt-3 text-apptext/35">I&apos;ll respond within 24 hours.</p>
+            <div className="py-6 sm:py-8 text-center">
+              <div className="mx-auto mb-5 flex h-14 w-14 sm:h-16 sm:w-16 items-center justify-center rounded-2xl bg-emerald-500/10 text-3xl sm:text-4xl shadow-[0_0_30px_rgba(16,185,129,0.1)]">✅</div>
+              <h3 className="font-display text-xl sm:text-2xl font-bold gradient-text">Message Sent!</h3>
+              <p className="mt-3 text-sm text-apptext/35">I&apos;ll respond within 24 hours.</p>
               <button onClick={() => setSent(false)} className="mt-6 rounded-xl border border-accent/10 bg-accent/[0.03] px-6 py-2.5 text-xs font-medium uppercase tracking-widest text-accent/50 transition-all hover:border-accent/25 hover:text-accent">
                 Send Another
               </button>
@@ -87,42 +116,57 @@ export default function Contact() {
           ) : (
             <>
               <div className="mb-3 text-center">
-                <h3 className="font-display text-xl font-bold text-white sm:text-2xl">Open to Work & Collaborations</h3>
-                <p className="mt-3 text-[15px] leading-7 text-apptext/35">
+                <h3 className="font-display text-lg sm:text-xl font-bold text-white md:text-2xl">Open to Work & Collaborations</h3>
+                <p className="mt-2 sm:mt-3 text-[13px] sm:text-[15px] leading-6 sm:leading-7 text-apptext/35">
                   Looking for internships, projects, or freelance opportunities. Let&apos;s build something great together!
                 </p>
               </div>
 
-              <div className="mb-8 flex flex-wrap justify-center gap-3">
-                {contactLinks.map((c) => (
-                  <a
-                    key={c.label}
-                    className="group inline-flex items-center gap-2 rounded-xl border border-accent/[0.06] bg-accent/[0.02] px-4 py-2.5 text-[12px] font-medium tracking-wide text-apptext/40 transition-all duration-300 hover:border-accent/20 hover:bg-accent/[0.04] hover:text-accent sm:text-[13px]"
-                    href={c.href}
-                    target={c.external ? "_blank" : undefined}
-                    rel={c.external ? "noreferrer" : undefined}
-                  >
-                    <span className="text-apptext/25 transition-colors group-hover:text-accent">{c.icon}</span>
-                    {c.label}
-                  </a>
-                ))}
+              {/* Contact links */}
+              <div className="mb-6 sm:mb-8 flex flex-col items-center gap-2 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-3">
+                {contactLinks.map((c) => {
+                  const baseClass = "group inline-flex items-center gap-2 rounded-xl border border-accent/[0.06] bg-accent/[0.02] px-3.5 py-2.5 text-[11px] font-medium tracking-wide text-apptext/40 transition-all duration-300 hover:border-accent/20 hover:bg-accent/[0.04] hover:text-accent sm:text-[13px] w-full sm:w-auto justify-center sm:justify-start";
+
+                  if (c.onClick) {
+                    return (
+                      <button key={c.label} className={baseClass} onClick={c.onClick} title="Click to copy email">
+                        <span className="text-apptext/25 transition-colors group-hover:text-accent">{c.icon}</span>
+                        <span className="truncate">{c.label}</span>
+                      </button>
+                    );
+                  }
+
+                  return (
+                    <a
+                      key={c.label}
+                      className={baseClass}
+                      href={c.href}
+                      target={c.external ? "_blank" : undefined}
+                      rel={c.external ? "noreferrer" : undefined}
+                    >
+                      <span className="text-apptext/25 transition-colors group-hover:text-accent">{c.icon}</span>
+                      <span className="truncate">{c.label}</span>
+                    </a>
+                  );
+                })}
               </div>
 
-              <form className="flex flex-col gap-4 text-left" onSubmit={handleSubmit}>
-                <div className="grid gap-4 sm:grid-cols-2">
+              {/* Form */}
+              <form className="flex flex-col gap-3 sm:gap-4 text-left" onSubmit={handleSubmit}>
+                <div className="grid gap-3 sm:gap-4 sm:grid-cols-2">
                   <input className={inputClass} placeholder="Your Name" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} required />
                   <input className={inputClass} placeholder="Your Email" type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} required />
                 </div>
-                <textarea className={`${inputClass} resize-none`} rows={5} placeholder="Your Message" value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} required />
+                <textarea className={`${inputClass} resize-none`} rows={4} placeholder="Your Message" value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} required />
                 <button
                   type="submit"
                   disabled={sending}
-                  className="group relative w-full overflow-hidden rounded-xl px-8 py-3.5 text-xs font-bold uppercase tracking-[0.18em] text-appbg transition-all duration-300 hover:shadow-[0_0_30px_rgba(0,240,255,0.15)] disabled:opacity-50 sm:w-auto sm:self-end sm:px-10"
+                  className="group relative w-full overflow-hidden rounded-xl px-6 py-3 text-[11px] font-bold uppercase tracking-[0.15em] text-appbg transition-all duration-300 hover:shadow-[0_0_30px_rgba(0,240,255,0.15)] disabled:opacity-50 sm:w-auto sm:self-end sm:px-10 sm:py-3.5 sm:text-xs sm:tracking-[0.18em]"
                 >
                   <span className="absolute inset-0 bg-accent-gradient opacity-90 transition-opacity duration-300 group-hover:opacity-100" />
                   <span className="relative font-display">{sending ? "Sending..." : "Send Message →"}</span>
                 </button>
-                {error && <p className="rounded-lg bg-red-500/10 border border-red-500/10 px-4 py-2 text-sm text-red-400">{error}</p>}
+                {error && <p className="rounded-lg bg-red-500/10 border border-red-500/10 px-3 py-2 text-xs sm:text-sm text-red-400">{error}</p>}
               </form>
             </>
           )}
