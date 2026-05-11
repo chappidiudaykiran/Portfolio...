@@ -1,21 +1,44 @@
 import { ACHIEVEMENTS } from "../data";
+import useScrollAnimation from "../hooks/useScrollAnimation";
 
 export default function Achievements() {
+  const sectionRef = useScrollAnimation();
+
   return (
-    <section id="achievements" className="relative z-10 min-h-screen px-5 pb-0 pt-24 sm:px-6 sm:pb-14 sm:pt-28 md:px-14 md:pb-16">
+    <section id="achievements" ref={sectionRef} className="relative z-10 min-h-screen px-5 py-24 sm:px-6 sm:py-28 md:px-14 md:py-32">
       <div className="mx-auto w-full max-w-6xl">
-        <div className="mb-14 text-center">
-          <div className="mb-2 text-[11px] uppercase tracking-[0.18em] text-accent sm:text-xs sm:tracking-[0.35em]">// Milestones</div>
-          <h2 className="text-2xl font-black tracking-tight text-white sm:text-3xl md:text-5xl">Achievements & Certs</h2>
-          <div className="mx-auto mt-4 h-[3px] w-14 rounded bg-accent" />
+        {/* Section header */}
+        <div className="scroll-animate mb-16 text-center" data-animate>
+          <span className="section-label">// Milestones</span>
+          <h2 className="section-title">Achievements & Certs</h2>
+          <div className="section-divider" />
         </div>
-        <div className="grid grid-cols-1 gap-5 sm:grid-cols-[repeat(auto-fill,minmax(250px,1fr))]">
-          {ACHIEVEMENTS.map(a => (
-            <div key={a.title} className="flex items-start gap-4 rounded-xl border border-slate-800 bg-slate-900/40 p-5 backdrop-blur-xl transition hover:-translate-y-1 hover:border-slate-700 sm:p-6">
-              <div className="shrink-0 text-3xl">{a.icon}</div>
+
+        {/* Achievement cards */}
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {ACHIEVEMENTS.map((a, i) => (
+            <div
+              key={a.title}
+              className="scroll-animate group glass-card-hover flex items-start gap-4 p-5 sm:p-6"
+              data-animate
+              style={{ transitionDelay: `${i * 0.08}s` }}
+            >
+              {/* Icon with glow background */}
+              <div className="relative shrink-0">
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-accent/10 text-2xl transition-all duration-300 group-hover:bg-accent/15 group-hover:scale-105">
+                  {a.icon}
+                </div>
+                <div className="absolute inset-0 rounded-xl bg-accent/5 blur-xl opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+              </div>
+
+              {/* Content */}
               <div>
-                <div className="mb-1 text-base font-bold text-accent">{a.title}</div>
-                <div className="text-sm leading-6 text-apptext/85">{a.sub}</div>
+                <h3 className="mb-1 font-display text-base font-bold tracking-tight text-white transition-colors duration-300 group-hover:text-accent-light">
+                  {a.title}
+                </h3>
+                <p className="text-[13px] leading-6 text-apptext/45 sm:text-sm">
+                  {a.sub}
+                </p>
               </div>
             </div>
           ))}
