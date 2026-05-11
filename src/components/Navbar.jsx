@@ -69,8 +69,7 @@ export default function Navbar({ navItems, activeSection }) {
           <div className="hidden items-center gap-3 md:flex">
             <a
               href="/Chappidi_Uday_Kiran_Resume.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
+              download="Chappidi_Uday_Kiran_Resume.pdf"
               className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-indigo-500 to-cyan-500 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-indigo-500/25 transition-all duration-300 hover:from-indigo-600 hover:to-cyan-600 hover:shadow-indigo-500/40 active:scale-95"
             >
               <DownloadIcon />
@@ -110,8 +109,7 @@ export default function Navbar({ navItems, activeSection }) {
           {/* Resume button in mobile menu */}
           <a
             href="/Chappidi_Uday_Kiran_Resume.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
+            download="Chappidi_Uday_Kiran_Resume.pdf"
             className="mt-4 inline-flex w-48 items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-indigo-500 to-cyan-500 px-6 py-3.5 text-center text-lg font-semibold text-white shadow-lg shadow-indigo-500/25 transition-all duration-300"
           >
             <DownloadIcon />

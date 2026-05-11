@@ -11,12 +11,10 @@ export const HERO = {
   email: "udaykiran24689@gmail.com",
   socials: [
     { label: "GitHub", href: "https://github.com/chappidiudaykiran" },
-    { label: "LinkedIn", href: "https://www.linkedin.com/in/chappidiudaykiran/" },
-    { label: "LeetCode", href: "https://leetcode.com/u/s210540/" },
+    { label: "LinkedIn", href: "https://www.linkedin.com/in/ukch/" },
   ],
   highlights: [
     { icon: "🏆", text: "Hackathon Winner" },
-    { icon: "⚡", text: "150+ LeetCode" },
     { icon: "🎓", text: "CGPA 8.84" },
   ],
 };
@@ -24,11 +22,10 @@ export const HERO = {
 export const ABOUT = {
   bio: [
     "I'm a Full Stack MERN Developer pursuing B.Tech in CSE at RGUKT IIIT Srikakulam (2023–2027), with a CGPA of 8.84. I specialize in building robust, scalable web apps with React, Node.js, Express, and MongoDB.",
-    "From AI-powered educational platforms to developer matching apps, I love turning ideas into polished, production-ready products. Winner at Aignite 3.0 GenAI Hackathon with 150+ LeetCode problems solved.",
+    "From AI-powered educational platforms to developer matching apps, I love turning ideas into polished, production-ready products. Winner at Aignite 3.0 GenAI Hackathon.",
   ],
   stats: [
     { value: "6+", label: "Projects Built", color: "indigo" },
-    { value: "150+", label: "LeetCode Solved", color: "cyan" },
     { value: "8.84", label: "CGPA", color: "violet" },
     { value: "2027", label: "Graduating", color: "emerald" },
   ],
@@ -127,7 +124,6 @@ export const PROJECTS = [
 
 export const ACHIEVEMENTS = [
   { icon: "🏆", title: "Aignite 3.0 GenAI Hackathon", sub: "Winner — Built innovative AI-powered solution", color: "amber" },
-  { icon: "⚡", title: "150+ LeetCode Solved", sub: "Strong problem solving in DSA and algorithms", color: "cyan" },
   { icon: "🎓", title: "CGPA: 8.84 / 10", sub: "B.Tech CSE at RGUKT IIIT Srikakulam (2023–2027)", color: "indigo" },
   { icon: "📜", title: "NPTEL — Data Science", sub: "Certified in Data Science using Python", color: "violet" },
   { icon: "🤖", title: "NPTEL — AI Methods", sub: "Certified in AI search methods for problem solving", color: "blue" },
