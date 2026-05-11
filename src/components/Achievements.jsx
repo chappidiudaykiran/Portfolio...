@@ -1,53 +1,43 @@
 import { ACHIEVEMENTS } from "../data";
-import useScrollAnimation from "../hooks/useScrollAnimation";
+
+const colorMap = {
+  amber: { text: "text-amber-400", bg: "bg-amber-500/10", border: "border-amber-500/20" },
+  cyan: { text: "text-cyan-400", bg: "bg-cyan-500/10", border: "border-cyan-500/20" },
+  indigo: { text: "text-indigo-400", bg: "bg-indigo-500/10", border: "border-indigo-500/20" },
+  violet: { text: "text-violet-400", bg: "bg-violet-500/10", border: "border-violet-500/20" },
+  blue: { text: "text-blue-400", bg: "bg-blue-500/10", border: "border-blue-500/20" },
+  emerald: { text: "text-emerald-400", bg: "bg-emerald-500/10", border: "border-emerald-500/20" },
+};
 
 export default function Achievements() {
-  const sectionRef = useScrollAnimation();
-
   return (
-    <section id="achievements" ref={sectionRef} className="relative z-10 min-h-screen px-4 py-20 sm:px-6 sm:py-28 md:px-14 md:py-32">
-      <div className="mx-auto w-full max-w-6xl">
-        {/* Header */}
-        <div className="scroll-animate mb-12 sm:mb-16 text-center" data-animate>
-          <span className="section-label">// Milestones</span>
-          <h2 className="section-title">Achievements & <span className="gradient-text">Certs</span></h2>
-          <div className="section-divider" />
+    <section id="achievements" className="relative px-4 py-24 sm:px-6 sm:py-28 lg:px-8">
+      <div className="mx-auto max-w-5xl">
+        <div className="mb-14 text-center">
+          <div className="section-tag justify-center">
+            <span className="text-indigo-400">{"<"}</span> Milestones <span className="text-indigo-400">{"/>"}</span>
+          </div>
+          <h2 className="section-title">Achievements & <span className="gradient-text">Certifications</span></h2>
+          <p className="section-subtitle mx-auto">Recognition and continuous learning milestones.</p>
         </div>
 
-        {/* Cards */}
-        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3">
-          {ACHIEVEMENTS.map((a, i) => (
-            <div
-              key={a.title}
-              className="scroll-animate group glass-card-hover neon-border flex items-start gap-3 sm:gap-4 p-4 sm:p-6"
-              data-animate
-              style={{ transitionDelay: `${i * 0.08}s` }}
-            >
-              {/* Icon */}
-              <div className="relative shrink-0">
-                <div
-                  className="flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-xl text-xl sm:text-2xl transition-all duration-300 group-hover:scale-110"
-                  style={{ backgroundColor: `${a.color}12`, boxShadow: `0 0 0 1px ${a.color}15` }}
-                >
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {ACHIEVEMENTS.map((a) => {
+            const c = colorMap[a.color] || colorMap.indigo;
+            return (
+              <div key={a.title} className="group glass-card-hover flex items-start gap-4 p-5">
+                <div className={`flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl ${c.bg} border ${c.border} text-2xl transition-transform duration-300 group-hover:scale-110`}>
                   {a.icon}
                 </div>
-                <div
-                  className="absolute inset-0 rounded-xl blur-xl opacity-0 transition-opacity duration-500 group-hover:opacity-60"
-                  style={{ backgroundColor: `${a.color}15` }}
-                />
+                <div className="min-w-0">
+                  <h3 className="font-display text-sm font-bold text-white transition-colors group-hover:text-indigo-300 sm:text-base">
+                    {a.title}
+                  </h3>
+                  <p className="mt-1 text-xs leading-relaxed text-muted sm:text-sm">{a.sub}</p>
+                </div>
               </div>
-
-              {/* Content */}
-              <div className="min-w-0">
-                <h3 className="mb-0.5 sm:mb-1 font-display text-sm sm:text-base font-bold tracking-tight text-white transition-colors duration-300 group-hover:text-accent-light">
-                  {a.title}
-                </h3>
-                <p className="text-[12px] leading-5 text-apptext/35 sm:text-sm sm:leading-6">
-                  {a.sub}
-                </p>
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>

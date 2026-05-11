@@ -1,66 +1,45 @@
-import { SKILL_GROUPS } from "../data";
-import useScrollAnimation from "../hooks/useScrollAnimation";
+import { SKILL_CATEGORIES } from "../data";
+
+const colorMap = {
+  indigo: { text: "text-indigo-400", bg: "bg-indigo-500/10", border: "border-indigo-500/20", pill: "border-indigo-500/20 bg-indigo-500/10 text-indigo-300" },
+  emerald: { text: "text-emerald-400", bg: "bg-emerald-500/10", border: "border-emerald-500/20", pill: "border-emerald-500/20 bg-emerald-500/10 text-emerald-300" },
+  cyan: { text: "text-cyan-400", bg: "bg-cyan-500/10", border: "border-cyan-500/20", pill: "border-cyan-500/20 bg-cyan-500/10 text-cyan-300" },
+  violet: { text: "text-violet-400", bg: "bg-violet-500/10", border: "border-violet-500/20", pill: "border-violet-500/20 bg-violet-500/10 text-violet-300" },
+};
 
 export default function Skills() {
-  const sectionRef = useScrollAnimation();
-
   return (
-    <section id="skills" ref={sectionRef} className="relative z-10 min-h-screen px-4 py-20 sm:px-6 sm:py-28 md:px-14 md:py-32">
-      <div className="mx-auto w-full max-w-6xl">
-        {/* Header */}
-        <div className="scroll-animate mb-12 sm:mb-16 text-center" data-animate>
-          <span className="section-label">// Tech Stack</span>
+    <section id="skills" className="relative px-4 py-24 sm:px-6 sm:py-28 lg:px-8">
+      <div className="mx-auto max-w-5xl">
+        <div className="mb-14 text-center">
+          <div className="section-tag justify-center">
+            <span className="text-indigo-400">{"<"}</span> Tech Stack <span className="text-indigo-400">{"/>"}</span>
+          </div>
           <h2 className="section-title">Skills & <span className="gradient-text">Tools</span></h2>
-          <div className="section-divider" />
+          <p className="section-subtitle mx-auto">Technologies I work with to build production-ready applications.</p>
         </div>
 
-        {/* Skill groups */}
-        <div className="flex flex-col gap-10 sm:gap-12">
-          {SKILL_GROUPS.map(({ cat, icon, skills }, gi) => (
-            <div key={cat} className="scroll-animate" data-animate style={{ transitionDelay: `${gi * 0.1}s` }}>
-              {/* Category */}
-              <div className="mb-5 sm:mb-6 flex items-center justify-center gap-2">
-                <span className="text-base sm:text-lg">{icon}</span>
-                <span className="text-[11px] sm:text-[13px] font-semibold uppercase tracking-[0.15em] sm:tracking-[0.2em] text-apptext/35">
-                  {cat}
-                </span>
-              </div>
-
-              {/* Cards */}
-              <div className="mx-auto grid max-w-5xl grid-cols-3 gap-2 sm:grid-cols-3 sm:gap-3 md:grid-cols-4 lg:grid-cols-6">
-                {skills.map((s, si) => (
-                  <div
-                    key={s.name}
-                    className="scroll-animate group glass-card-hover neon-border p-3 sm:p-4 text-center"
-                    data-animate
-                    style={{ transitionDelay: `${gi * 0.1 + si * 0.04}s` }}
-                  >
-                    <div className="mb-1.5 sm:mb-2.5 text-xl sm:text-2xl transition-transform duration-300 group-hover:scale-125 group-hover:drop-shadow-[0_0_8px_rgba(0,240,255,0.3)]">
-                      {s.icon}
-                    </div>
-                    <div className="mb-2 sm:mb-3 text-[9px] sm:text-[11px] font-semibold uppercase tracking-[0.08em] sm:tracking-[0.1em] text-white/80 leading-tight">
-                      {s.name}
-                    </div>
-                    <div className="h-0.5 sm:h-1 overflow-hidden rounded-full bg-white/[0.04]">
-                      <div
-                        className="skill-bar h-full rounded-full transition-all duration-1000 ease-out"
-                        style={{
-                          width: "0%",
-                          background: `linear-gradient(90deg, ${s.color}, ${s.color}66)`,
-                          "--skill-level": `${s.level}%`,
-                          boxShadow: `0 0 8px ${s.color}40`,
-                        }}
-                      />
-                    </div>
-                    <div
-                      className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-                      style={{ boxShadow: `inset 0 0 25px ${s.color}08, 0 0 15px ${s.color}05` }}
-                    />
+        <div className="grid gap-6 sm:grid-cols-2">
+          {SKILL_CATEGORIES.map((cat) => {
+            const c = colorMap[cat.color] || colorMap.indigo;
+            return (
+              <div key={cat.title} className="glass-card-hover p-6">
+                <div className="mb-4 flex items-center gap-3">
+                  <div className={`flex h-10 w-10 items-center justify-center rounded-lg ${c.bg} border ${c.border} text-lg`}>
+                    {cat.icon}
                   </div>
-                ))}
+                  <h3 className={`font-display text-lg font-bold ${c.text}`}>{cat.title}</h3>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {cat.skills.map((s) => (
+                    <span key={s} className={`rounded-md border px-2.5 py-1 font-mono text-xs ${c.pill}`}>
+                      {s}
+                    </span>
+                  ))}
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>

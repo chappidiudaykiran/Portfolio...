@@ -6,8 +6,7 @@ import Projects from "./components/Projects";
 import Achievements from "./components/Achievements";
 import Contact from "./components/Contact";
 import Navbar from "./components/Navbar";
-import ScrollDots from "./components/ScrollDots";
-import PortfolioFooter from "./components/PortfolioFooter";
+import Footer from "./components/PortfolioFooter";
 import ParticleBackground from "./components/ParticleBackground";
 import { NAV_ITEMS } from "./data";
 
@@ -21,7 +20,7 @@ export default function Portfolio() {
         entries.forEach((e) => {
           if (e.isIntersecting) setActiveSection(ids.indexOf(e.target.id));
         }),
-      { threshold: 0.35 }
+      { threshold: 0.3 }
     );
     ids.forEach((id) => {
       const el = document.getElementById(id);
@@ -30,49 +29,19 @@ export default function Portfolio() {
     return () => observer.disconnect();
   }, []);
 
-  // Animate skill bars when skills section is visible
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) {
-            const bars = e.target.querySelectorAll(".skill-bar");
-            bars.forEach((bar) => {
-              const level = bar.style.getPropertyValue("--skill-level");
-              if (level) {
-                requestAnimationFrame(() => {
-                  bar.style.width = level;
-                });
-              }
-            });
-          }
-        });
-      },
-      { threshold: 0.2 }
-    );
-
-    const skillsSection = document.getElementById("skills");
-    if (skillsSection) observer.observe(skillsSection);
-    return () => observer.disconnect();
-  }, []);
-
   return (
-    <div className="relative overflow-x-hidden min-h-screen">
-      {/* 3D Particle Background */}
+    <div className="relative min-h-screen overflow-x-hidden">
       <ParticleBackground />
-
-      {/* Dark overlay for readability */}
-      <div className="fixed inset-0 -z-[5] pointer-events-none bg-appbg/60" />
-
       <Navbar navItems={NAV_ITEMS} activeSection={activeSection} />
-      <ScrollDots navItems={NAV_ITEMS} activeSection={activeSection} />
-      <Hero />
-      <About />
-      <Skills />
-      <Projects />
-      <Achievements />
-      <Contact />
-      <PortfolioFooter />
+      <main>
+        <Hero />
+        <About />
+        <Skills />
+        <Projects />
+        <Achievements />
+        <Contact />
+      </main>
+      <Footer />
     </div>
   );
 }
