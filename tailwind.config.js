@@ -4,20 +4,22 @@ export default {
   theme: {
     extend: {
       colors: {
-        accent: "#6366f1",
-        "accent-light": "#818cf8",
-        "accent-dark": "#4f46e5",
-        secondary: "#06b6d4",
-        "secondary-light": "#22d3ee",
-        appbg: "#030712",
-        apptext: "#e2e8f0",
-        "card-bg": "rgba(255,255,255,0.03)",
-        "card-border": "rgba(255,255,255,0.06)",
+        accent: "#00f0ff",
+        "accent-light": "#67f7ff",
+        "accent-dark": "#00b8c9",
+        secondary: "#10b981",
+        "secondary-light": "#34d399",
+        highlight: "#7c3aed",
+        "highlight-light": "#a78bfa",
+        appbg: "#020a13",
+        "appbg-light": "#0a1628",
+        apptext: "#e0f2fe",
+        "card-bg": "rgba(0,240,255,0.02)",
+        "card-border": "rgba(0,240,255,0.08)",
       },
       fontFamily: {
         sans: ["Inter", "system-ui", "sans-serif"],
         display: ["Space Grotesk", "Inter", "system-ui", "sans-serif"],
-        rajdhani: ["Inter", "system-ui", "sans-serif"],
       },
       animation: {
         "fade-in-up": "fadeInUp 0.7s cubic-bezier(0.16,1,0.3,1) forwards",
@@ -32,8 +34,7 @@ export default {
         shimmer: "shimmer 2s linear infinite",
         "spin-slow": "spin 8s linear infinite",
         "gradient-x": "gradientX 6s ease infinite",
-        typewriter: "typewriter 3.5s steps(28) 1s forwards",
-        blink: "blink 0.75s step-end infinite",
+        "border-glow": "borderGlow 3s ease infinite",
       },
       keyframes: {
         fadeInUp: {
@@ -72,19 +73,16 @@ export default {
           "0%, 100%": { backgroundPosition: "0% 50%" },
           "50%": { backgroundPosition: "100% 50%" },
         },
-        typewriter: {
-          "0%": { width: "0" },
-          "100%": { width: "100%" },
-        },
-        blink: {
-          "0%, 100%": { borderColor: "transparent" },
-          "50%": { borderColor: "#6366f1" },
+        borderGlow: {
+          "0%, 100%": { borderColor: "rgba(0,240,255,0.1)" },
+          "50%": { borderColor: "rgba(0,240,255,0.3)" },
         },
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic": "conic-gradient(var(--tw-gradient-stops))",
-        "accent-gradient": "linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #06b6d4 100%)",
+        "accent-gradient": "linear-gradient(135deg, #00f0ff 0%, #10b981 50%, #7c3aed 100%)",
+        "accent-gradient-h": "linear-gradient(90deg, #00f0ff 0%, #10b981 50%, #7c3aed 100%)",
+        "card-gradient": "linear-gradient(135deg, rgba(0,240,255,0.05) 0%, rgba(16,185,129,0.03) 50%, rgba(124,58,237,0.05) 100%)",
       },
     },
   },

@@ -8,17 +8,14 @@ export default function ScrollDots({ navItems, activeSection }) {
           onClick={() => document.getElementById(n.toLowerCase())?.scrollIntoView({ behavior: "smooth", block: "start" })}
           aria-label={`Navigate to ${n}`}
         >
-          {/* Label on hover */}
-          <span className="rounded-md bg-appbg/80 px-2 py-1 text-[10px] font-medium uppercase tracking-widest text-apptext/50 opacity-0 backdrop-blur-xl transition-all duration-300 group-hover:opacity-100 group-hover:-translate-x-1">
+          <span className="rounded-md bg-appbg/80 px-2 py-1 text-[10px] font-medium uppercase tracking-widest text-apptext/40 opacity-0 backdrop-blur-xl transition-all duration-300 group-hover:opacity-100 group-hover:-translate-x-1">
             {n}
           </span>
-
-          {/* Dot */}
           <div
             className={`rounded-full transition-all duration-500 ${
               activeSection === i
-                ? "h-2.5 w-2.5 bg-accent shadow-[0_0_12px_rgba(99,102,241,0.6)]"
-                : "h-1.5 w-1.5 bg-white/20 group-hover:bg-white/40 group-hover:scale-125"
+                ? "h-2.5 w-2.5 bg-accent shadow-[0_0_12px_rgba(0,240,255,0.6)]"
+                : "h-1.5 w-1.5 bg-accent/20 group-hover:bg-accent/40 group-hover:scale-125"
             }`}
           />
         </button>

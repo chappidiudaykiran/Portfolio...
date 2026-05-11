@@ -8,6 +8,7 @@ import Contact from "./components/Contact";
 import Navbar from "./components/Navbar";
 import ScrollDots from "./components/ScrollDots";
 import PortfolioFooter from "./components/PortfolioFooter";
+import ParticleBackground from "./components/ParticleBackground";
 import { NAV_ITEMS } from "./data";
 
 export default function Portfolio() {
@@ -29,7 +30,7 @@ export default function Portfolio() {
     return () => observer.disconnect();
   }, []);
 
-  // Animate skill bars when visible
+  // Animate skill bars when skills section is visible
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -57,26 +58,11 @@ export default function Portfolio() {
 
   return (
     <div className="relative overflow-x-hidden min-h-screen">
-      {/* Global background */}
-      <div className="fixed inset-0 -z-10 pointer-events-none">
-        {/* Base gradient */}
-        <div className="absolute inset-0 bg-appbg" />
+      {/* 3D Particle Background */}
+      <ParticleBackground />
 
-        {/* Subtle radial glow at top */}
-        <div className="absolute left-1/2 top-0 h-[800px] w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent/[0.03] blur-[120px]" />
-
-        {/* Grid overlay */}
-        <div
-          className="absolute inset-0 opacity-[0.015]"
-          style={{
-            backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
-            backgroundSize: "60px 60px",
-          }}
-        />
-
-        {/* Noise texture overlay */}
-        <div className="absolute inset-0 opacity-[0.02]" style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E\")" }} />
-      </div>
+      {/* Dark overlay for readability */}
+      <div className="fixed inset-0 -z-[5] pointer-events-none bg-appbg/60" />
 
       <Navbar navItems={NAV_ITEMS} activeSection={activeSection} />
       <ScrollDots navItems={NAV_ITEMS} activeSection={activeSection} />

@@ -5,21 +5,21 @@ export default function About() {
   const sectionRef = useScrollAnimation();
 
   const stats = [
-    { value: "6+", label: "Projects" },
-    { value: "150+", label: "LeetCode" },
-    { value: "8.84", label: "CGPA" },
-    { value: "2027", label: "Graduating" },
+    { value: "6+", label: "Projects", color: "#00f0ff" },
+    { value: "150+", label: "LeetCode", color: "#10b981" },
+    { value: "8.84", label: "CGPA", color: "#7c3aed" },
+    { value: "2027", label: "Graduating", color: "#f59e0b" },
   ];
 
   return (
     <section id="about" ref={sectionRef} className="relative z-10 min-h-screen px-5 py-24 sm:px-6 sm:py-28 md:px-14 md:py-32">
       <div className="mx-auto grid w-full max-w-6xl items-center gap-12 md:grid-cols-[1fr_1.4fr] md:gap-16">
-        {/* Image */}
+        {/* Profile Image */}
         <div className="scroll-animate flex items-center justify-center" data-animate>
           <div className="group relative">
-            {/* Glow ring */}
-            <div className="absolute -inset-1 rounded-full opacity-40 blur-md transition-opacity duration-700 group-hover:opacity-70" style={{ background: "linear-gradient(135deg, #6366f1, #8b5cf6, #06b6d4)" }} />
-            <div className="relative h-[240px] w-[240px] overflow-hidden rounded-full border-2 border-white/[0.08] p-[3px] sm:h-[280px] sm:w-[280px]">
+            {/* Animated glow ring */}
+            <div className="absolute -inset-2 rounded-full opacity-30 blur-lg transition-all duration-700 group-hover:opacity-60 group-hover:blur-xl animate-spin-slow" style={{ background: "conic-gradient(from 0deg, #00f0ff, #10b981, #7c3aed, #00f0ff)" }} />
+            <div className="relative h-[240px] w-[240px] overflow-hidden rounded-full border-2 border-accent/10 p-[3px] sm:h-[280px] sm:w-[280px]">
               <div className="flex h-full w-full items-center justify-center overflow-hidden rounded-full bg-appbg" aria-label="Uday Kiran avatar">
                 <img
                   src={profileImage}
@@ -42,13 +42,13 @@ export default function About() {
           </div>
 
           <div className="scroll-animate stagger-2" data-animate>
-            <p className="mb-4 text-[15px] leading-7 text-apptext/55 sm:text-base sm:leading-8">
+            <p className="mb-4 text-[15px] leading-7 text-apptext/40 sm:text-base sm:leading-8">
               I&apos;m a Full Stack MERN Developer pursuing B.Tech in CSE at RGUKT IIIT Srikakulam (2023–2027),
               with a CGPA of 8.84. I specialize in building robust, scalable web apps with React, Node.js, Express, and MongoDB.
             </p>
-            <p className="text-[15px] leading-7 text-apptext/55 sm:text-base sm:leading-8">
+            <p className="text-[15px] leading-7 text-apptext/40 sm:text-base sm:leading-8">
               From AI-powered educational platforms to developer matching apps, I love turning ideas into
-              polished, production-ready products. Strong DSA foundation with 150+ LeetCode problems solved.
+              polished, production-ready products. Winner at Aignite 3.0 GenAI Hackathon with 150+ LeetCode problems solved.
             </p>
           </div>
 
@@ -57,11 +57,11 @@ export default function About() {
             {stats.map((s, i) => (
               <div
                 key={s.label}
-                className={`scroll-animate stagger-${i + 3} glass-card-hover p-4 text-center`}
+                className={`scroll-animate stagger-${i + 3} glass-card-hover p-4 text-center group`}
                 data-animate
               >
-                <div className="font-display text-2xl font-bold tracking-tight gradient-text">{s.value}</div>
-                <div className="mt-1 text-[11px] uppercase tracking-[0.15em] text-apptext/40">{s.label}</div>
+                <div className="font-display text-2xl font-bold tracking-tight" style={{ color: s.color }}>{s.value}</div>
+                <div className="mt-1 text-[11px] uppercase tracking-[0.15em] text-apptext/30">{s.label}</div>
               </div>
             ))}
           </div>
