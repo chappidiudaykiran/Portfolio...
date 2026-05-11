@@ -4,7 +4,7 @@ export default function ScrollDots({ navItems, activeSection }) {
       {navItems.map((n, i) => (
         <div
           key={n}
-          className={`h-1.5 w-1.5 cursor-pointer rounded-full transition ${activeSection === i ? "scale-150 bg-neon shadow-neon" : "bg-neon/25"}`}
+          className={`h-1.5 w-1.5 cursor-pointer rounded-full transition ${activeSection === i ? "scale-150 bg-accent shadow-[0_0_8px_theme(colors.accent)]" : "bg-slate-700 hover:bg-slate-500"}`}
           onClick={() => document.getElementById(n.toLowerCase())?.scrollIntoView({ behavior: "smooth", block: "start" })}
           title={n}
         />

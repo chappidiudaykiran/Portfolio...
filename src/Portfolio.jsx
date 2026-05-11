@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import Hero from "./components/Hero";
 import About from "./components/About";
 import Skills from "./components/Skills";
@@ -9,13 +9,9 @@ import Navbar from "./components/Navbar";
 import ScrollDots from "./components/ScrollDots";
 import PortfolioFooter from "./components/PortfolioFooter";
 import { NAV_ITEMS } from "./data";
-import { useThreeScene } from "./hooks/useThreeScene";
 
 export default function Portfolio() {
-  const canvasRef = useRef(null);
   const [activeSection, setActiveSection] = useState(0);
-
-  useThreeScene(canvasRef);
 
   useEffect(() => {
     const ids = NAV_ITEMS.map(n => n.toLowerCase());
@@ -31,9 +27,8 @@ export default function Portfolio() {
   }, []);
 
   return (
-    <div className="relative overflow-x-hidden">
-      <canvas id="canvas-bg" ref={canvasRef} className="fixed inset-0 -z-10 h-screen w-screen pointer-events-none" />
-      <div className="fixed inset-0 -z-[9] pointer-events-none bg-gradient-to-b from-appbg/58 via-appbg/48 to-appbg/62" />
+    <div className="relative overflow-x-hidden min-h-screen selection:bg-accent/30 selection:text-accent">
+      <div className="fixed inset-0 -z-10 bg-slate-950 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(14,165,233,0.1)_0%,rgba(2,6,23,1)_100%)] pointer-events-none" />
       <Navbar navItems={NAV_ITEMS} />
       <ScrollDots navItems={NAV_ITEMS} activeSection={activeSection} />
       <Hero />
